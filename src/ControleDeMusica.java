@@ -2,8 +2,8 @@ import org.jfugue.Player;
 
 
 public class ControleDeMusica {
-	ConversorTextoMusica conversor;
-	Player player = new Player();
+	private ConversorTextoMusica conversor;
+	private Player player = new Player();
 	
 	public ControleDeMusica(EntradaDeTexto entradaTexto) {
 		conversor = new ConversorTextoMusica(entradaTexto);
