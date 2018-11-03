@@ -23,11 +23,32 @@ public class Arquivo {
 		try {
 			texto = new String(Files.readAllBytes(Paths.get("nomeDoArquivo")));
 		} catch (IOException e) {
+			//TODO: gerar erro
 			return;
 		}
 		entradaTexto.setCaixaDeTexto(texto);
 		arquivoAberto = nomeDoArquivo;
 		return;
+	}
+	
+	public void salvar() {
+		try(PrintWriter saida = new PrintWriter(arquivoAberto)) {
+			saida.print(entradaTexto.getCaixaDeTexto());
+		} catch (FileNotFoundException e) {
+			//TODO: gerar erro
+			return;
+		}	
+	}
+	
+	public void salvarComo(String nomeDoArquivo) {
+		try(PrintWriter saida = new PrintWriter(nomeDoArquivo)) {
+			saida.print(entradaTexto.getCaixaDeTexto());
+			arquivoAberto = nomeDoArquivo;
+		} catch (FileNotFoundException e) {
+			//TODO: gerar erro
+			return;
+		}	
+		
 	}
 	
 }
