@@ -17,8 +17,11 @@ public class ConversorTextoMusica {
 	
 	public String converterTextoParaSequencia() {
 		// Faz a tradução do texto para uma String que Jfugue entende
-		int instrumento = 0;
-		char oitava = '3';
+		int oitava = Default.oitava;
+		int instrumento = Default.instrumento;
+		int bpm = Default.bpm;
+		int volume = Default.volume;
+		
 		String sequencia = "";
 		String texto = entradaTexto.getCaixaDeTexto();
 		
