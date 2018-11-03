@@ -14,12 +14,13 @@ public class ConversorTextoMusica {
 		this.entradaTexto = entradaTexto;
 	}
 	
-	// Faz a tradução do texto para uma String que Jfugue entende
+	
 	public String converterTextoParaSequencia() {
-		
+		// Faz a tradução do texto para uma String que Jfugue entende
 		
 		return "";
 	}
+	
 	
 
 }
