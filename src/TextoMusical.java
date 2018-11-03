@@ -13,7 +13,7 @@ class MultiThread implements Runnable {
 		System.out.println ("Thread " + threadName  + " is running");
 		
 		if(new String("PLAYS").equals(threadName)) {
-			Pattern pattern = new Pattern("I[Flute] X[Volume]=10200 T80 C D E F X[Volume]=5400 I[Piano] G A B");
+			Pattern pattern = new Pattern("I[Flute] X[Volume]=10200 T0 C D E F X[Volume]=5400 I[Piano] G A B");
 			player.play(pattern);
 		}
 		
