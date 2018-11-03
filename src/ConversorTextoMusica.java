@@ -26,7 +26,11 @@ public class ConversorTextoMusica {
 		sequencia += escolherInstrumento(musica.getInstrumento());
 		
 		for(int i = 0; i < texto.length(); i++) {
-			sequencia += converterCaractere(texto.charAt(i), musica) + " ";
+			if(i == 0) {
+				sequencia += converterCaractere(Character.toString(texto.charAt(i)),"", musica) + " ";
+			} else {
+				sequencia += converterCaractere(Character.toString(texto.charAt(i)),Character.toString(texto.charAt(i-1)), musica) + " ";
+			}		
 		}
 		
 		
@@ -52,67 +56,69 @@ public class ConversorTextoMusica {
 		return "X[Volume]="+Integer.toString(volume);
 	}
 	
-	private String converterCaractere(char caractere, Musica musica) {
+	private String converterCaractere(String caractere,String caractereAnterior, Musica musica) {
 		switch(caractere) {
-			case '!':
+			case "!":
 				musica.dobraVolume();
 				return traduzirVolume(musica.getVolume());
-			case 'o':
-			case 'i':
-			case 'u':
+			case "o":
+			case "i":
+			case "u":
 				musica.metadeVolume();
 				return traduzirVolume(musica.getVolume());
-			case 'a':
-			case 'b':
-			case 'c':
-			case 'd':
-			case 'f':
-			case 'g':
-				return (Character.toString(caractere)+traduzirOitava(musica.getOitava()));
-			case 'h':
-			case 'j':
-			case 'k':
-			case 'l':
-			case 'm':
-			case 'n':
-			case 'p':
-			case 'q':
-			case 'r':
-			case 's':
-			case 't':
-			case 'v':
-			case 'w':
-			case 'x':
-			case 'y':
-			case 'z':
+			case "a":
+			case "b":
+			case "c":
+			case "d":
+			case "f":
+			case "g":
+				return (caractere+traduzirOitava(musica.getOitava()));
+			case "h":
+			case "j":
+			case "k":
+			case "l":
+			case "m":
+			case "n":
+			case "p":
+			case "q":
+			case "r":
+			case "s":
+			case "t":
+			case "v":
+			case "w":
+			case "x":
+			case "y":
+			case "z":
 				break;
-			case '0':
-			case '2':
-			case '4':
-			case '6':
-			case '8':
+			case "0":
+			case "2":
+			case "4":
+			case "6":
+			case "8":
 				musica.aumentaOitava();
 				break;
-			case '1':
-			case '3':
-			case '5':
-			case '7':
-			case '9':
+			case "1":
+			case "3":
+			case "5":
+			case "7":
+			case "9":
 				musica.diminuiOitava();
 				break;
 			
-			case '?':
-			case '.':
+			case "?":
+			case ".":
 				musica.setOitavaDefault();
 				break;
-			case '\r':
+			case "\r":
 				musica.trocarInstrumento();
 				return this.escolherInstrumento(musica.getInstrumento());
-			case ';':
+			case ";":
 				musica.aumentaRitmo();
+				traduzirBpm(musica.getBpm());
 				break;
-			case ',':
+			case ",":
 				musica.diminuiRitmo();
+				traduzirBpm(musica.getBpm());
 				break;
 			default:
 				return "";
