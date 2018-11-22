@@ -39,10 +39,12 @@ public class TextoMusical {
 		Player player = new Player();
 		//Thread test2 = new Thread(new MultiThread("STOP",player));
 		//test2.start();
-		Thread test1 = new Thread(new MultiThread("PLAYS",player));
-		test1.start();
+		//Thread test1 = new Thread(new MultiThread("PLAYS",player));
+		//test1.start();
 		//Pattern pattern = new Pattern("I[Flute] X[Volume]=10200 T80 C D E F X[Volume]=5400 G A B B B B B B B B B B B");
 		//player.play(pattern);
+		//Pattern pattern = new Pattern("I[Flute] X[Volume]=10200 T0 C D E F X[Volume]=5400 I[Piano] G A B");
+		player.play("I[Flute] X[Volume]=10200 T120 C D E F X[Volume]=5400 I[Piano] G A B");
 
 		
 	}
