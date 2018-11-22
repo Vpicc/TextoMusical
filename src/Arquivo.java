@@ -23,7 +23,7 @@ public class Arquivo {
 		try {
 			texto = new String(Files.readAllBytes(Paths.get("nomeDoArquivo")));
 		} catch (IOException e) {
-			//TODO: gerar erro
+			System.out.println("\nFalha ao ler arquivo!\n");
 			return;
 		}
 		entradaTexto.setCaixaDeTexto(texto);
@@ -35,7 +35,7 @@ public class Arquivo {
 		try(PrintWriter saida = new PrintWriter(arquivoAberto)) {
 			saida.print(entradaTexto.getCaixaDeTexto());
 		} catch (FileNotFoundException e) {
-			//TODO: gerar erro
+			System.out.println("\nArquivo não encontrado!\n");
 			return;
 		}	
 	}
@@ -45,7 +45,7 @@ public class Arquivo {
 			saida.print(entradaTexto.getCaixaDeTexto());
 			arquivoAberto = nomeDoArquivo;
 		} catch (FileNotFoundException e) {
-			//TODO: gerar erro
+			System.out.println("\nArquivo não encontrado!\n");
 			return;
 		}	
 		

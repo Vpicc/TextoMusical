@@ -21,9 +21,9 @@ public class ConversorTextoMusica {
 		
 		String sequencia = "";
 		String texto = entradaTexto.getCaixaDeTexto();
-		texto = texto.toLowerCase();
+
 		
-		sequencia += escolherInstrumento(musica.getInstrumento());
+		sequencia += traduzirInstrumento(musica.getInstrumento());
 		
 		for(int i = 0; i < texto.length(); i++) {
 			if(i == 0) {
@@ -37,19 +37,8 @@ public class ConversorTextoMusica {
 		return sequencia;
 	}
 	
-	private String escolherInstrumento(int opcao) {
-		switch(opcao) {
-		case 0:
-			return "I[Piano]";
-		case 1:
-			return "I[Flute]";
-		case 2:
-			return "I[Violin]";
-		case 3:
-			return "I[Guitar]";
-		default:
-			return "I[Piano]";
-		}
+	private String traduzirInstrumento(int instrumento) {
+		return "I"+Integer.toString(instrumento);
 	}
 	
 	private String traduzirVolume(int volume) {
@@ -58,21 +47,36 @@ public class ConversorTextoMusica {
 	
 	private String converterCaractere(String caractere,String caractereAnterior, Musica musica) {
 		switch(caractere) {
+			case "A":
+			case "B":
+			case "C":
+			case "D":
+			case "E":
+			case "F":
+			case "G":
+				return (caractere+traduzirOitava(musica.getOitava()));
+		}
+		switch(caractere.toLowerCase()) {
 			case "!":
-				musica.dobraVolume();
-				return traduzirVolume(musica.getVolume());
+				musica.trocarInstrumento(Instrumento.HARPSICHORD);
+				return traduzirInstrumento(musica.getInstrumento());
 			case "o":
 			case "i":
 			case "u":
-				musica.metadeVolume();
+				musica.aumentaVolume(0.1);
 				return traduzirVolume(musica.getVolume());
 			case "a":
 			case "b":
 			case "c":
 			case "d":
+			case "e":
 			case "f":
 			case "g":
-				return (caractere+traduzirOitava(musica.getOitava()));
+				if(notaValida(caractereAnterior)) {
+					return (caractereAnterior+traduzirOitava(musica.getOitava()));
+				} else {
+					return "R";
+				}
 			case "h":
 			case "j":
 			case "k":
@@ -89,39 +93,46 @@ public class ConversorTextoMusica {
 			case "x":
 			case "y":
 			case "z":
-				break;
+				return (caractereAnterior+traduzirOitava(musica.getOitava()));
 			case "0":
 			case "2":
 			case "4":
 			case "6":
 			case "8":
-				musica.aumentaOitava();
-				break;
 			case "1":
 			case "3":
 			case "5":
 			case "7":
 			case "9":
-				musica.diminuiOitava();
-				break;
-			
+				musica.trocarInstrumento(Integer.parseInt(caractere));
+				return traduzirInstrumento(musica.getInstrumento());
 			case "?":
 			case ".":
-				musica.setOitavaDefault();
+				if(musica.getInstrumento() < musica.getMaxInstrumento()) {
+					musica.aumentaOitava();
+				} else {
+					musica.setOitavaDefault();
+				}
 				break;
 			case "\r":
-				musica.trocarInstrumento();
-				return this.escolherInstrumento(musica.getInstrumento());
+				musica.trocarInstrumento(Instrumento.TUBULAR_BELLS);
+				return this.traduzirInstrumento(musica.getInstrumento());
 			case ";":
 				musica.aumentaRitmo();
 				traduzirBpm(musica.getBpm());
 				break;
 			case ",":
-				musica.diminuiRitmo();
-				traduzirBpm(musica.getBpm());
-				break;
+				musica.trocarInstrumento(Instrumento.CHURCH_ORGAN);
+				return this.traduzirInstrumento(musica.getInstrumento());
+			case " ":
+				musica.aumentaVolume(1);
+				return traduzirVolume(musica.getVolume());
 			default:
-				return "";
+				if(notaValida(caractereAnterior)) {
+					return (caractereAnterior+traduzirOitava(musica.getOitava()));
+				} else {
+					return "R";
+				}
 		}
 		
 		return "";
@@ -134,6 +145,21 @@ public class ConversorTextoMusica {
 	
 	private String traduzirBpm(int bpm) {
 		return "T"+Integer.toString(bpm);
+	}
+	
+	private boolean notaValida(String caractere) {
+		switch(caractere) {
+			case "A":
+			case "B":
+			case "C":
+			case "D":
+			case "E":
+			case "F":
+			case "G":
+				return true;
+		}
+		
+		return false;
 	}
 	
 	
