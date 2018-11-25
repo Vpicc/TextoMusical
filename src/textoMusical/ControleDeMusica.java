@@ -1,3 +1,4 @@
+package textoMusical;
 import org.jfugue.Player;
 
 
@@ -11,6 +12,7 @@ public class ControleDeMusica {
 	
 	public void tocarMusica() {
 		String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
+		System.out.println(textoConvertidoEmSequencia);
 		player.play(textoConvertidoEmSequencia);
 	}
 	

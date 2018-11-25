@@ -1,3 +1,4 @@
+package textoMusical;
 import org.jfugue.Pattern;
 import org.jfugue.Player;
 class MultiThread implements Runnable {

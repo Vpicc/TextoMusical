@@ -1,3 +1,4 @@
+package textoMusical;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -35,7 +36,7 @@ public class Arquivo {
 		try(PrintWriter saida = new PrintWriter(arquivoAberto)) {
 			saida.print(entradaTexto.getCaixaDeTexto());
 		} catch (FileNotFoundException e) {
-			System.out.println("\nArquivo não encontrado!\n");
+			System.out.println("\nArquivo nï¿½o encontrado!\n");
 			return;
 		}	
 	}
@@ -45,7 +46,7 @@ public class Arquivo {
 			saida.print(entradaTexto.getCaixaDeTexto());
 			arquivoAberto = nomeDoArquivo;
 		} catch (FileNotFoundException e) {
-			System.out.println("\nArquivo não encontrado!\n");
+			System.out.println("\nArquivo nï¿½o encontrado!\n");
 			return;
 		}	
 		
