@@ -1,4 +1,7 @@
 package textoMusical;
+import java.io.File;
+import java.io.IOException;
+
 import org.jfugue.Player;
 
 
@@ -12,8 +15,19 @@ public class ControleDeMusica {
 	
 	public void tocarMusica() {
 		String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
-		System.out.println(textoConvertidoEmSequencia);
+
 		player.play(textoConvertidoEmSequencia);
+
+	}
+	
+	public void salvarMIDI(File arquivo) {
+		String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
+		try {
+			player.saveMidi(textoConvertidoEmSequencia, arquivo);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void pararMusica() {

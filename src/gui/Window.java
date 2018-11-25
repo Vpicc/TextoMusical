@@ -76,7 +76,7 @@ public class Window {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String texto = caixaDeTexto.getText();
-				System.out.println(texto);
+				//System.out.println(texto);
 				EntradaDeTexto a = new EntradaDeTexto(texto);
 				
 				c = new ControleDeMusica(a);
@@ -189,6 +189,27 @@ public class Window {
 	                    TelaPrincipal, WindowEvent.WINDOW_CLOSING));
 			}
 		});
+		
+		JMenuItem SalvarMidi = new JMenuItem("Salvar MIDI como...");
+		SalvarMidi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fs = new JFileChooser();
+				fs.setDialogTitle("Salvar MIDI");
+				fs.setFileFilter(new FiltroTipoDeArquivo(".midi", "Arquivo .midi"));
+				int resultado = fs.showSaveDialog(null);
+				if (resultado == JFileChooser.APPROVE_OPTION) {
+					String conteudo = caixaDeTexto.getText();
+					File arq = fs.getSelectedFile();
+					try {
+						c.salvarMIDI(arq);
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(null, e2.getMessage());
+					}
+					
+				}
+			}
+		});
+		mnArquivo.add(SalvarMidi);
 		mnArquivo.add(Sair);
 	}
 }
