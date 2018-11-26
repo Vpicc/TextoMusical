@@ -23,11 +23,11 @@ public class MenuArquivo {
 	private JFrame telaPrincipal;
 	private Arquivo controleDeArquivo;
 	JMenu mnArquivo = new JMenu("Arquivo");
-	JTextPane caixaDeTexto;
+	CaixaDeTexto caixaDeTexto;
 	
-	public MenuArquivo (JFrame tela, EntradaDeTexto entradaDeTexto, JTextPane caixaTexto) {
+	public MenuArquivo(JFrame tela, CaixaDeTexto caixaTexto) {
 		telaPrincipal = tela;
-		controleDeArquivo = new Arquivo(entradaDeTexto);
+		controleDeArquivo = new Arquivo(caixaTexto.getEntradaDeTexto());
 		caixaDeTexto = caixaTexto;
 	}
 	
@@ -65,7 +65,7 @@ public class MenuArquivo {
 				if (resultado == JFileChooser.APPROVE_OPTION) {
 					File arq = fs.getSelectedFile();
 					controleDeArquivo.abrir(arq);
-					caixaDeTexto.setText(controleDeArquivo.getEntradaTexto().getCaixaDeTexto());
+					caixaDeTexto.setTexto(controleDeArquivo.getEntradaTexto().getCaixaDeTexto());
 				}
 			}
 		};
@@ -85,7 +85,7 @@ public class MenuArquivo {
 				fs.setFileFilter(new FiltroTipoDeArquivo(".txt", "Arquivo .txt"));
 				int resultado = fs.showSaveDialog(null);
 				if (resultado == JFileChooser.APPROVE_OPTION) {
-					String conteudo = caixaDeTexto.getText();
+					String conteudo = caixaDeTexto.getTexto();
 					File arq = fs.getSelectedFile();
 					try {
 						FileWriter fw = new FileWriter(arq.getPath()+".txt");
