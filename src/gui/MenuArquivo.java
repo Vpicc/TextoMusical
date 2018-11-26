@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.FileWriter;
-
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -35,11 +33,14 @@ public class MenuArquivo {
 		
 		adicionaOpcaoAbrir();
 		
+		adicionaOpcaoSalvar();
+		
 		adicionaOpcaoSalvarComo();
+		
+		adicionaOpcaoSalvarMidi();
 
 		adicionaOpcaoSair();
 		
-		adicionaOpcaoSalvarMidi();
 		
 		
 
@@ -67,6 +68,33 @@ public class MenuArquivo {
 		};
 	}
 	
+	private void adicionaOpcaoSalvar() {
+		JMenuItem salvar = new JMenuItem("Salvar");
+		salvar.addActionListener(acaoSalvar());
+		mnArquivo.add(salvar);
+	}
+	
+	private ActionListener acaoSalvar() {
+		return new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(controleDeArquivo.arquivoNaoAberto()) {
+					JFileChooser fs = new JFileChooser();
+					fs.setDialogTitle("Salvar");
+					fs.setFileFilter(new FiltroTipoDeArquivo(".txt", "Arquivo .txt"));
+					int resultado = fs.showSaveDialog(null);
+					if (resultado == JFileChooser.APPROVE_OPTION) {
+						File arq = fs.getSelectedFile();
+						controleDeArquivo.salvarComo(arq);
+					}
+				} else {
+					controleDeArquivo.salvar();
+				}
+			}
+		};
+	}
+	
+	
+	
 	private void adicionaOpcaoSalvarComo() {
 		JMenuItem SalvarComo = new JMenuItem("Salvar como...");
 		SalvarComo.addActionListener(acaoSalvarComo());
@@ -81,17 +109,8 @@ public class MenuArquivo {
 				fs.setFileFilter(new FiltroTipoDeArquivo(".txt", "Arquivo .txt"));
 				int resultado = fs.showSaveDialog(null);
 				if (resultado == JFileChooser.APPROVE_OPTION) {
-					String conteudo = caixaDeTexto.getTexto();
 					File arq = fs.getSelectedFile();
-					try {
-						FileWriter fw = new FileWriter(arq.getPath()+".txt");
-						fw.write(conteudo);
-						fw.flush();
-						fw.close();
-					} catch (Exception e2) {
-						JOptionPane.showMessageDialog(null, e2.getMessage());
-					}
-
+					controleDeArquivo.salvarComo(arq);
 				}
 			}
 		};

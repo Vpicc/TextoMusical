@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import org.jfugue.Player;
 
 public class Arquivo {
-	String arquivoAberto;
+	String arquivoAberto = "";
 	EntradaDeTexto entradaTexto;
 	ConversorTextoMusica conversor;
 	Player player = new Player();
@@ -37,24 +37,36 @@ public class Arquivo {
 			if (br != null) {
 				br.close();
 			}
+			arquivoAberto = arquivo.getPath();
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(null, e2.getMessage());
 		}
 	}
 	
+	public boolean arquivoNaoAberto() {
+		return arquivoAberto.isEmpty();
+	}
+	
 	public void salvar() {
-		try(PrintWriter saida = new PrintWriter(arquivoAberto)) {
-			saida.print(entradaTexto.getCaixaDeTexto());
-		} catch (FileNotFoundException e) {
-			System.out.println("\nArquivo n�o encontrado!\n");
-			return;
-		}	
+		String conteudo = entradaTexto.getCaixaDeTexto();
+		try {	
+			FileWriter fw = new FileWriter(arquivoAberto);
+			fw.write(conteudo);
+			fw.flush();
+			fw.close();
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(null, e2.getMessage());
+		}
 	}
 	
 	public void salvarComo(File arquivo) {
 		String conteudo = entradaTexto.getCaixaDeTexto();
+		arquivoAberto = arquivo.getPath();
+		if (!arquivoAberto.endsWith(".txt")) {
+			arquivoAberto += ".txt";
+		}
 		try {
-			FileWriter fw = new FileWriter(arquivo.getPath()+".txt");
+			FileWriter fw = new FileWriter(arquivoAberto);
 			fw.write(conteudo);
 			fw.flush();
 			fw.close();

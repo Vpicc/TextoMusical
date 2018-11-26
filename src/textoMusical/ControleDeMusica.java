@@ -12,9 +12,7 @@ public class ControleDeMusica extends Thread{
 	}
 
 	public void tocarMusica() {
-
 		if(player.isPlaying() == false) {
-
 			if(player.isPaused()) {
 				System.out.println("resumindo");
 				player.resume();
@@ -34,7 +32,6 @@ public class ControleDeMusica extends Thread{
 	}
 
 	public void pausarMusica() {
-
 		if(player.isPlaying()) {
 			player.pause();
 		}
