@@ -19,18 +19,13 @@ public class MenuArquivo {
 	JMenu mnArquivo = new JMenu("Arquivo");
 	CaixaDeTexto caixaDeTexto;
 	
-	public MenuArquivo(JFrame tela, CaixaDeTexto caixaTexto) {
-		telaPrincipal = tela;
+	public MenuArquivo(CaixaDeTexto caixaTexto) {
 		controleDeArquivo = new Arquivo(caixaTexto.getEntradaDeTexto());
 		caixaDeTexto = caixaTexto;
 	}
 	
 	public void inicializar() {
-		JMenuBar menuBar = new JMenuBar();
-		telaPrincipal.setJMenuBar(menuBar);
-		
-		menuBar.add(mnArquivo);
-		
+				
 		adicionaOpcaoAbrir();
 		
 		adicionaOpcaoSalvar();
@@ -41,9 +36,10 @@ public class MenuArquivo {
 
 		adicionaOpcaoSair();
 		
-		
-		
-
+	}
+	
+	public JMenu getJMenu() {
+		return mnArquivo;
 	}
 	
 	private void adicionaOpcaoAbrir() {
