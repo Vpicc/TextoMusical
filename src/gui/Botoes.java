@@ -1,8 +1,10 @@
 package gui;
 
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +15,7 @@ public class Botoes {
 	private JFrame telaPrincipal;
 	private ControleDeMusica threadDeControle;
 	private CaixaDeTexto caixaDeTexto;
+	private final int DIMENSAO_ICONE = 20;
 	
 	public Botoes(JFrame tela, CaixaDeTexto caixaTexto) {
 		telaPrincipal = tela;
@@ -31,7 +34,12 @@ public class Botoes {
 	private void botaoReproduzir() {
 		JButton Reproduzir = new JButton("");
 		Reproduzir.setToolTipText("PLAY");
-		Reproduzir.setIcon(new ImageIcon(Janela.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlay.png")));
+		try{
+		Image img = ImageIO.read(getClass().getResource("img/play.png"));
+		Reproduzir.setIcon(new ImageIcon(img.getScaledInstance(DIMENSAO_ICONE, DIMENSAO_ICONE, Image.SCALE_SMOOTH)));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
 		Reproduzir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -51,8 +59,14 @@ public class Botoes {
 	}
 	
 	private void botaoParar() {
-		JButton Parar = new JButton("STOP");
+		JButton Parar = new JButton("");
 		Parar.setToolTipText("STOP");
+		try{
+		Image img = ImageIO.read(getClass().getResource("img/stop.png"));
+		Parar.setIcon(new ImageIcon(img.getScaledInstance(DIMENSAO_ICONE, DIMENSAO_ICONE, Image.SCALE_SMOOTH)));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
 		Parar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -69,7 +83,12 @@ public class Botoes {
 	private void botaoPausar() {
 		JButton Pausar = new JButton("");
 		Pausar.setToolTipText("PAUSE");
-		Pausar.setIcon(new ImageIcon(Janela.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPause.png")));
+		try{
+		Image img = ImageIO.read(getClass().getResource("img/pause.png"));
+		Pausar.setIcon(new ImageIcon(img.getScaledInstance(DIMENSAO_ICONE, DIMENSAO_ICONE, Image.SCALE_SMOOTH)));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
 		Pausar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -83,8 +102,14 @@ public class Botoes {
 	}
 	
 	private void botaoVoltar() {
-		JButton Voltar = new JButton("REWIND");
+		JButton Voltar = new JButton("");
 		Voltar.setToolTipText("REWIND");
+		try{
+		Image img = ImageIO.read(getClass().getResource("img/rewind.png"));
+		Voltar.setIcon(new ImageIcon(img.getScaledInstance(DIMENSAO_ICONE, DIMENSAO_ICONE, Image.SCALE_SMOOTH)));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
 		Voltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
