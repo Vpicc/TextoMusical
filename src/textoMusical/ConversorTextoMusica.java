@@ -1,3 +1,4 @@
+package textoMusical;
 
 public class ConversorTextoMusica {
 	private EntradaDeTexto entradaTexto;
@@ -16,18 +17,18 @@ public class ConversorTextoMusica {
 	}
 	
 	public String converterTextoParaSequencia() {
-		// Faz a tradução do texto para uma String que Jfugue entende
+		// Faz a traduï¿½ï¿½o do texto para uma String que Jfugue entende
 		Musica musica = new Musica();
 		
 		String sequencia = "";
 		String texto = entradaTexto.getCaixaDeTexto();
 
 		
-		sequencia += traduzirInstrumento(musica.getInstrumento());
+		sequencia += traduzirInstrumento(musica.getInstrumento())+ " " + traduzirVolume(musica.getVolume());
 		
 		for(int i = 0; i < texto.length(); i++) {
 			if(i == 0) {
-				sequencia += converterCaractere(Character.toString(texto.charAt(i)),"", musica) + " ";
+				sequencia += " " + converterCaractere(Character.toString(texto.charAt(i)),"", musica) + " ";
 			} else {
 				sequencia += converterCaractere(Character.toString(texto.charAt(i)),Character.toString(texto.charAt(i-1)), musica) + " ";
 			}		
@@ -72,11 +73,6 @@ public class ConversorTextoMusica {
 			case "e":
 			case "f":
 			case "g":
-				if(notaValida(caractereAnterior)) {
-					return (caractereAnterior+traduzirOitava(musica.getOitava()));
-				} else {
-					return "R";
-				}
 			case "h":
 			case "j":
 			case "k":
@@ -93,7 +89,11 @@ public class ConversorTextoMusica {
 			case "x":
 			case "y":
 			case "z":
-				return (caractereAnterior+traduzirOitava(musica.getOitava()));
+				if(notaValida(caractereAnterior)) {
+					return (caractereAnterior+traduzirOitava(musica.getOitava()));
+				} else {
+					return "R";
+				}
 			case "0":
 			case "2":
 			case "4":
@@ -118,9 +118,8 @@ public class ConversorTextoMusica {
 				musica.trocarInstrumento(Instrumento.TUBULAR_BELLS);
 				return this.traduzirInstrumento(musica.getInstrumento());
 			case ";":
-				musica.aumentaRitmo();
-				traduzirBpm(musica.getBpm());
-				break;
+				musica.trocarInstrumento(Instrumento.PAN_FLUTE);
+				return this.traduzirInstrumento(musica.getInstrumento());
 			case ",":
 				musica.trocarInstrumento(Instrumento.CHURCH_ORGAN);
 				return this.traduzirInstrumento(musica.getInstrumento());

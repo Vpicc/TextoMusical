@@ -1,3 +1,4 @@
+package textoMusical;
 
 public class EntradaDeTexto {
 	private String caixaDeTexto;
