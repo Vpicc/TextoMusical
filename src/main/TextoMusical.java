@@ -1,7 +1,7 @@
 package main;
 import java.awt.EventQueue;
 
-import gui.Janela;
+import gui.JanelaPrincipal;
 
 public class TextoMusical {
 	
@@ -10,7 +10,7 @@ public class TextoMusical {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Janela janela = new Janela();
+					JanelaPrincipal janela = new JanelaPrincipal();
 					janela.inicializar();
 				} catch (Exception e) {
 					e.printStackTrace();
