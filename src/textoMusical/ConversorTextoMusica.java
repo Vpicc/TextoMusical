@@ -17,7 +17,7 @@ public class ConversorTextoMusica {
 	}
 	
 	public String converterTextoParaSequencia() {
-		// Faz a traduï¿½ï¿½o do texto para uma String que Jfugue entende
+		// Faz a tradução do texto para uma String que Jfugue entende
 		Musica musica = new Musica();
 		
 		String sequencia = "";
@@ -142,9 +142,11 @@ public class ConversorTextoMusica {
 		return Integer.toString(oitava);
 	}
 	
+	/* Deprecated
 	private String traduzirBpm(int bpm) {
 		return "T"+Integer.toString(bpm);
 	}
+	*/
 	
 	private boolean notaValida(String caractere) {
 		switch(caractere) {

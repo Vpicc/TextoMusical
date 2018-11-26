@@ -17,7 +17,7 @@ class MultiThreads implements Runnable {
 		
 		if(new String("PLAYS").equals(threadName)) {
 
-			player.play(pattern);
+			//player.play(pattern);
 		}
 		
 		if(new String("STOP").equals(threadName)) {

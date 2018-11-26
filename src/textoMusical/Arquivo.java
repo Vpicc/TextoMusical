@@ -1,14 +1,20 @@
 package textoMusical;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
+
+import javax.swing.JOptionPane;
+
+import org.jfugue.Player;
 
 public class Arquivo {
 	String arquivoAberto;
 	EntradaDeTexto entradaTexto;
+	ConversorTextoMusica conversor;
+	Player player = new Player();
 	
 	public Arquivo(EntradaDeTexto entradaTexto) {
 		this.entradaTexto = entradaTexto;
+		conversor = new ConversorTextoMusica(entradaTexto);
 	}
 	
 	public EntradaDeTexto getEntradaTexto() {
@@ -19,17 +25,21 @@ public class Arquivo {
 		this.entradaTexto = entradaTexto;
 	}
 	
-	public void abrir(String nomeDoArquivo) {
-		String texto;
+	public void abrir(File arquivo) {
 		try {
-			texto = new String(Files.readAllBytes(Paths.get("nomeDoArquivo")));
-		} catch (IOException e) {
-			System.out.println("\nFalha ao ler arquivo!\n");
-			return;
+			BufferedReader br = new BufferedReader(new FileReader(arquivo.getPath()));
+			String buffer = "";
+			String linha = "";
+			while((linha=br.readLine()) != null) {
+				buffer += linha;
+			}
+			entradaTexto.setCaixaDeTexto(buffer);
+			if (br != null) {
+				br.close();
+			}
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(null, e2.getMessage());
 		}
-		entradaTexto.setCaixaDeTexto(texto);
-		arquivoAberto = nomeDoArquivo;
-		return;
 	}
 	
 	public void salvar() {
@@ -41,15 +51,26 @@ public class Arquivo {
 		}	
 	}
 	
-	public void salvarComo(String nomeDoArquivo) {
-		try(PrintWriter saida = new PrintWriter(nomeDoArquivo)) {
-			saida.print(entradaTexto.getCaixaDeTexto());
-			arquivoAberto = nomeDoArquivo;
-		} catch (FileNotFoundException e) {
-			System.out.println("\nArquivo n�o encontrado!\n");
-			return;
-		}	
+	public void salvarComo(File arquivo) {
+		String conteudo = entradaTexto.getCaixaDeTexto();
+		try {
+			FileWriter fw = new FileWriter(arquivo.getPath()+".txt");
+			fw.write(conteudo);
+			fw.flush();
+			fw.close();
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(null, e2.getMessage());
+		}
 		
+	}
+	
+	public void salvarMIDI(File arquivo) {
+		String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
+		try {
+			player.saveMidi(textoConvertidoEmSequencia, arquivo);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
