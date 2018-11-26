@@ -5,41 +5,68 @@ import java.io.IOException;
 import org.jfugue.Player;
 
 
-public class ControleDeMusica {
+public class ControleDeMusica extends Thread{
 	private ConversorTextoMusica conversor;
 	private Player player = new Player();
-	
+
 	public ControleDeMusica(EntradaDeTexto entradaTexto) {
 		conversor = new ConversorTextoMusica(entradaTexto);
 	}
-	
+
 	public void tocarMusica() {
-		String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
 
-		player.play(textoConvertidoEmSequencia);
+		if(player.isPlaying() == false) {
 
+			if(player.isPaused()) {
+				System.out.println("resumindo");
+				player.resume();
+			}
+			else {
+				System.out.println("NAO");
+				String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
+
+				player.play(textoConvertidoEmSequencia);
+			}
+		}
 	}
-	
+
 	public void salvarMIDI(File arquivo) {
 		String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
 		try {
 			player.saveMidi(textoConvertidoEmSequencia, arquivo);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void pararMusica() {
-		player.stop();
+		if(player.isFinished() == false){
+			player.stop();
+		}
 	}
-	
+
 	public void pausarMusica() {
-		player.pause();
+
+		if(player.isPlaying()) {
+			player.pause();
+		}
 	}
-	
-	public void voltarMusica() {
+
+
+	public void voltarMusica() { //IMPLEMENTEI TODO ELE NA WINDOW.JAVA
 		this.pararMusica();
 		this.tocarMusica();
+	}
+	public void run() {
+		if(player.isPaused()) {
+			System.out.println("resumindo THREAD");
+			player.resume();
+		}
+		else {
+			System.out.println("NAO thread");
+			String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
+
+			player.play(textoConvertidoEmSequencia);
+		}
 	}
 }

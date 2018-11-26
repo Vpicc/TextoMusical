@@ -25,7 +25,7 @@ import java.io.FileWriter;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
-public class Window {
+public class Window{
 
 	private JFrame TelaPrincipal;
 
@@ -55,7 +55,7 @@ public class Window {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	ControleDeMusica c;
+	private ControleDeMusica threadDeControle = new ControleDeMusica(null);
 
 	private void initialize() {
 		TelaPrincipal = new JFrame();
@@ -63,71 +63,77 @@ public class Window {
 		TelaPrincipal.setBounds(100, 100, 450, 321);
 		TelaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		TelaPrincipal.getContentPane().setLayout(null);
-		
+
 		JTextPane caixaDeTexto = new JTextPane();
 		caixaDeTexto.setToolTipText("Digite o texto...");
 		caixaDeTexto.setBounds(55, 12, 333, 184);
 		TelaPrincipal.getContentPane().add(caixaDeTexto);
-		
-		JButton btnPlay = new JButton("");
-		btnPlay.setToolTipText("PLAY");
-		btnPlay.setIcon(new ImageIcon(Window.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlay.png")));
-		btnPlay.addMouseListener(new MouseAdapter() {
+
+		JButton Reproduzir = new JButton("");
+		Reproduzir.setToolTipText("PLAY");
+		Reproduzir.setIcon(new ImageIcon(Window.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlay.png")));
+		Reproduzir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+
 				String texto = caixaDeTexto.getText();
-				//System.out.println(texto);
-				EntradaDeTexto a = new EntradaDeTexto(texto);
-				
-				c = new ControleDeMusica(a);
-				
-				c.tocarMusica();
-				
+				geraSequenciaMusical(texto);
+				//Thread que chama a funcao run() na classe ControleDeMusica
+				if(threadDeControle.isAlive()) {
+					threadDeControle.tocarMusica();		
+				}
+				else {
+					threadDeControle.start();				
+				}
+
 			}
 		});
-		btnPlay.setBounds(65, 208, 117, 25);
-		TelaPrincipal.getContentPane().add(btnPlay);
-		
-		JButton btnStop = new JButton("STOP");
-		btnStop.setToolTipText("STOP");
-		btnStop.addMouseListener(new MouseAdapter() {
+		Reproduzir.setBounds(65, 208, 117, 25);
+		TelaPrincipal.getContentPane().add(Reproduzir);
+
+		JButton Parar = new JButton("STOP");
+		Parar.setToolTipText("STOP");
+		Parar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				c.pararMusica();
+				threadDeControle.pararMusica();
 			}
 		});
-		btnStop.setBounds(250, 208, 117, 25);
-		TelaPrincipal.getContentPane().add(btnStop);
-		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setToolTipText("PAUSE");
-		btnNewButton.setIcon(new ImageIcon(Window.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPause.png")));
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		Parar.setBounds(250, 208, 117, 25);
+		TelaPrincipal.getContentPane().add(Parar);
+
+		JButton Pausar = new JButton("");
+		Pausar.setToolTipText("PAUSE");
+		Pausar.setIcon(new ImageIcon(Window.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPause.png")));
+		Pausar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				c.pausarMusica();
+				if(threadDeControle.isAlive())
+					threadDeControle.pausarMusica();
+				return;
 			}
 		});
-		btnNewButton.setBounds(65, 233, 117, 25);
-		TelaPrincipal.getContentPane().add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("REWIND");
-		btnNewButton_1.setToolTipText("REWIND");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
+		Pausar.setBounds(65, 233, 117, 25);
+		TelaPrincipal.getContentPane().add(Pausar);
+
+		JButton Voltar = new JButton("REWIND");
+		Voltar.setToolTipText("REWIND");
+		Voltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				c.voltarMusica();
+
+			threadDeControle.voltarMusica();
 			}
 		});
-		btnNewButton_1.setBounds(250, 233, 117, 25);
-		TelaPrincipal.getContentPane().add(btnNewButton_1);
-		
+		Voltar.setBounds(250, 233, 117, 25);
+		TelaPrincipal.getContentPane().add(Voltar);
+
 		JMenuBar menuBar = new JMenuBar();
 		TelaPrincipal.setJMenuBar(menuBar);
-		
+
 		JMenu mnArquivo = new JMenu("Arquivo");
 		menuBar.add(mnArquivo);
-		
+
 		JMenuItem Abrir = new JMenuItem("Abrir...");
 		Abrir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -153,11 +159,11 @@ public class Window {
 					}
 				}
 
-				
+
 			}
 		});
 		mnArquivo.add(Abrir);
-		
+
 		JMenuItem SalvarComo = new JMenuItem("Salvar como...");
 		SalvarComo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -176,20 +182,20 @@ public class Window {
 					} catch (Exception e2) {
 						JOptionPane.showMessageDialog(null, e2.getMessage());
 					}
-					
+
 				}
 			}
 		});
 		mnArquivo.add(SalvarComo);
-		
+
 		JMenuItem Sair = new JMenuItem("Sair");
 		Sair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaPrincipal.dispatchEvent(new WindowEvent(
-	                    TelaPrincipal, WindowEvent.WINDOW_CLOSING));
+						TelaPrincipal, WindowEvent.WINDOW_CLOSING));
 			}
 		});
-		
+
 		JMenuItem SalvarMidi = new JMenuItem("Salvar MIDI como...");
 		SalvarMidi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -198,18 +204,26 @@ public class Window {
 				fs.setFileFilter(new FiltroTipoDeArquivo(".midi", "Arquivo .midi"));
 				int resultado = fs.showSaveDialog(null);
 				if (resultado == JFileChooser.APPROVE_OPTION) {
-					String conteudo = caixaDeTexto.getText();
 					File arq = fs.getSelectedFile();
 					try {
-						c.salvarMIDI(arq);
+						threadDeControle.salvarMIDI(arq);
 					} catch (Exception e2) {
 						JOptionPane.showMessageDialog(null, e2.getMessage());
 					}
-					
+
 				}
 			}
 		});
 		mnArquivo.add(SalvarMidi);
 		mnArquivo.add(Sair);
+	}
+	public void geraSequenciaMusical(String texto){
+		//System.out.println(texto);
+		EntradaDeTexto a = new EntradaDeTexto(texto);
+		if(threadDeControle.isAlive())
+			return;
+		else {
+			threadDeControle = new ControleDeMusica(a);
+		}
 	}
 }
