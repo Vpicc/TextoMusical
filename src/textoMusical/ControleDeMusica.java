@@ -20,9 +20,8 @@ public class ControleDeMusica extends Thread{
 				player.resume();
 			}
 			else {
-				System.out.println("NAO");
 				String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
-
+				System.out.println(textoConvertidoEmSequencia);
 				player.play(textoConvertidoEmSequencia);
 			}
 		}
@@ -41,21 +40,7 @@ public class ControleDeMusica extends Thread{
 		}
 	}
 
-
-	public void voltarMusica() { //IMPLEMENTEI TODO ELE NA WINDOW.JAVA
-		this.pararMusica();
-		this.tocarMusica();
-	}
 	public void run() {
-		if(player.isPaused()) {
-			System.out.println("resumindo THREAD");
-			player.resume();
-		}
-		else {
-			System.out.println("NAO thread");
-			String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
-
-			player.play(textoConvertidoEmSequencia);
-		}
+			tocarMusica();
 	}
 }

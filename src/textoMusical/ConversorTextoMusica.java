@@ -47,14 +47,7 @@ public class ConversorTextoMusica {
 	}
 	
 	private String converterCaractere(String caractere,String caractereAnterior, Musica musica) {
-		switch(caractere) {
-			case "A":
-			case "B":
-			case "C":
-			case "D":
-			case "E":
-			case "F":
-			case "G":
+		if(notaValida(caractere)) {
 				return (caractere+traduzirOitava(musica.getOitava()));
 		}
 		switch(caractere.toLowerCase()) {

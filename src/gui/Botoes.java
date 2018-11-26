@@ -36,12 +36,12 @@ public class Botoes {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//Thread que chama a funcao run() na classe ControleDeMusica
-				geraSequenciaMusical();
 				if(threadDeControle.isAlive()) {
 					threadDeControle.tocarMusica();		
 				}
 				else {
-					threadDeControle.start();				
+					geraThreadDeControle();
+					threadDeControle.start();
 				}
 
 			}
@@ -56,7 +56,9 @@ public class Botoes {
 		Parar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				threadDeControle.pararMusica();
+				if(threadDeControle.isAlive()) {
+					threadDeControle.pararMusica();
+				}
 			}
 		});
 		Parar.setBounds(250, 208, 117, 25);
@@ -71,9 +73,9 @@ public class Botoes {
 		Pausar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(threadDeControle.isAlive())
+				if(threadDeControle.isAlive()) {
 					threadDeControle.pausarMusica();
-				return;
+				}
 			}
 		});
 		Pausar.setBounds(65, 233, 117, 25);
@@ -86,22 +88,20 @@ public class Botoes {
 		Voltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (threadDeControle.isAlive()) {
+					threadDeControle.pararMusica();
+					geraThreadDeControle();
+					threadDeControle.start();
+				}
 
-			threadDeControle.voltarMusica();
 			}
 		});
 		Voltar.setBounds(250, 233, 117, 25);
 		telaPrincipal.getContentPane().add(Voltar);
 	}
 	
-	
-	
-	private void geraSequenciaMusical(){
-		if(threadDeControle.isAlive())
-			return;
-		else {
-			threadDeControle = new ControleDeMusica(caixaDeTexto.getEntradaDeTexto());
-		}
+	private void geraThreadDeControle(){
+		threadDeControle = new ControleDeMusica(caixaDeTexto.getEntradaDeTexto());
 	}
 
 }
