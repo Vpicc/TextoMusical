@@ -21,6 +21,14 @@ public class Botoes {
 	}
 	
 	public void inicializar() {
+		botaoReproduzir();
+		botaoParar();
+		botaoPausar();
+		botaoVoltar();
+		
+	}
+	
+	private void botaoReproduzir() {
 		JButton Reproduzir = new JButton("");
 		Reproduzir.setToolTipText("PLAY");
 		Reproduzir.setIcon(new ImageIcon(Janela.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlay.png")));
@@ -40,7 +48,9 @@ public class Botoes {
 		});
 		Reproduzir.setBounds(65, 208, 117, 25);
 		telaPrincipal.getContentPane().add(Reproduzir);
-
+	}
+	
+	private void botaoParar() {
 		JButton Parar = new JButton("STOP");
 		Parar.setToolTipText("STOP");
 		Parar.addMouseListener(new MouseAdapter() {
@@ -52,6 +62,9 @@ public class Botoes {
 		Parar.setBounds(250, 208, 117, 25);
 		telaPrincipal.getContentPane().add(Parar);
 
+	}
+	
+	private void botaoPausar() {
 		JButton Pausar = new JButton("");
 		Pausar.setToolTipText("PAUSE");
 		Pausar.setIcon(new ImageIcon(Janela.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPause.png")));
@@ -65,7 +78,9 @@ public class Botoes {
 		});
 		Pausar.setBounds(65, 233, 117, 25);
 		telaPrincipal.getContentPane().add(Pausar);
-
+	}
+	
+	private void botaoVoltar() {
 		JButton Voltar = new JButton("REWIND");
 		Voltar.setToolTipText("REWIND");
 		Voltar.addMouseListener(new MouseAdapter() {
@@ -78,6 +93,8 @@ public class Botoes {
 		Voltar.setBounds(250, 233, 117, 25);
 		telaPrincipal.getContentPane().add(Voltar);
 	}
+	
+	
 	
 	private void geraSequenciaMusical(){
 		if(threadDeControle.isAlive())
