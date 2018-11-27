@@ -3,7 +3,7 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
-public class Menu {
+public class Menu implements ComponenteGUI {
 	JFrame telaPrincipal;
 	JMenuBar barraDeMenu = new JMenuBar();
 	CaixaDeTexto caixaDeTexto;

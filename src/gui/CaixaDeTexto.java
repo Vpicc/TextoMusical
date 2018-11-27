@@ -8,7 +8,7 @@ import javax.swing.event.DocumentListener;
 
 import textoMusical.EntradaDeTexto;
 
-public class CaixaDeTexto {
+public class CaixaDeTexto implements ComponenteGUI{
 	private EntradaDeTexto entradaDeTexto = new EntradaDeTexto("");
 	private JFrame telaPrincipal;
 	JTextPane caixaDeTexto;

@@ -7,13 +7,12 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import textoMusical.Arquivo;
 
-public class MenuArquivo {
+public class MenuArquivo implements ComponenteGUI {
 	private JFrame telaPrincipal;
 	private Arquivo controleDeArquivo;
 	JMenu mnArquivo = new JMenu("Arquivo");
