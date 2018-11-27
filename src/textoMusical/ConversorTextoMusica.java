@@ -135,7 +135,7 @@ public class ConversorTextoMusica {
 		return Integer.toString(oitava);
 	}
 	
-	/* Deprecated
+	/* Deprecado
 	private String traduzirBpm(int bpm) {
 		return "T"+Integer.toString(bpm);
 	}

@@ -31,7 +31,7 @@ public class Arquivo {
 			String buffer = "";
 			String linha = "";
 			while((linha=br.readLine()) != null) {
-				buffer += linha;
+				buffer += linha + "\r";
 			}
 			entradaTexto.setCaixaDeTexto(buffer);
 			if (br != null) {
