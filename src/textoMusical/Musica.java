@@ -7,7 +7,7 @@ public class Musica {
 	private int volume;
 	private final int MAX_VOLUME = 16383;
 	private final int MAX_BPM = 10000;
-	private final int MAX_OITAVA = 10;
+	private final int MAX_OITAVA = 9;
 	private final int MAX_INSTRUMENTO = 127;
 	private final int DEFAULT_OITAVA = 0;
 	private final int DEFAULT_INSTRUMENTO = 0;

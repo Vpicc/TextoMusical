@@ -2,12 +2,12 @@ package gui;
 
 import javax.swing.JFrame;
 
-public class JanelaPrincipal{
+public class JanelaPrincipal extends Janela{
 
 	private JFrame telaPrincipal;
 
 	public void inicializar() {
-		telaPrincipal = Janela.criaJanela("Texto Musical",Janela.Tipo.PRINCIPAL);
+		telaPrincipal = criaJanela("Texto Musical",Tipo.PRINCIPAL);
 		CaixaDeTexto caixaDeTexto = new CaixaDeTexto(telaPrincipal);
 		Botoes botoes = new Botoes(telaPrincipal, caixaDeTexto);
 		

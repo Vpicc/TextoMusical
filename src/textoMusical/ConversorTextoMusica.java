@@ -101,7 +101,7 @@ public class ConversorTextoMusica {
 				return traduzirInstrumento(musica.getInstrumento());
 			case "?":
 			case ".":
-				if(musica.getInstrumento() < musica.getMaxInstrumento()) {
+				if(musica.getOitava() < musica.getMaxOitava()) {
 					musica.aumentaOitava();
 				} else {
 					musica.setOitavaDefault();
@@ -135,7 +135,7 @@ public class ConversorTextoMusica {
 		return Integer.toString(oitava);
 	}
 	
-	/* Deprecado
+	/* Nao utilizado na fase 3
 	private String traduzirBpm(int bpm) {
 		return "T"+Integer.toString(bpm);
 	}

@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 
 import textoMusical.ControleDeMusica;
 
-public class Botoes {
+public class Botoes implements ComponenteGUI {
 	private JFrame telaPrincipal;
 	private ControleDeMusica threadDeControle;
 	private CaixaDeTexto caixaDeTexto;
