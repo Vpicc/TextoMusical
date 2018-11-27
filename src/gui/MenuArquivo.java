@@ -18,9 +18,10 @@ public class MenuArquivo implements ComponenteGUI {
 	JMenu mnArquivo = new JMenu("Arquivo");
 	CaixaDeTexto caixaDeTexto;
 	
-	public MenuArquivo(CaixaDeTexto caixaTexto) {
+	public MenuArquivo(CaixaDeTexto caixaTexto, JFrame tela) {
 		controleDeArquivo = new Arquivo(caixaTexto.getEntradaDeTexto());
 		caixaDeTexto = caixaTexto;
+		telaPrincipal = tela;
 	}
 	
 	public void inicializar() {

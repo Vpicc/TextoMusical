@@ -3,12 +3,12 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
-public class Menu implements ComponenteGUI {
+public class BarraDeMenu implements ComponenteGUI {
 	JFrame telaPrincipal;
 	JMenuBar barraDeMenu = new JMenuBar();
 	CaixaDeTexto caixaDeTexto;
 	
-	public Menu(JFrame tela, CaixaDeTexto caixaTexto) {
+	public BarraDeMenu(JFrame tela, CaixaDeTexto caixaTexto) {
 		telaPrincipal = tela;
 		caixaDeTexto = caixaTexto;
 	}
@@ -16,7 +16,7 @@ public class Menu implements ComponenteGUI {
 	public void inicializar() {
 		telaPrincipal.setJMenuBar(barraDeMenu);
 		
-		MenuArquivo menuArquivo = new MenuArquivo(caixaDeTexto);
+		MenuArquivo menuArquivo = new MenuArquivo(caixaDeTexto, telaPrincipal);
 		menuArquivo.inicializar();
 		
 		barraDeMenu.add(menuArquivo.getJMenu());

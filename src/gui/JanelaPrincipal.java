@@ -14,7 +14,7 @@ public class JanelaPrincipal extends Janela{
 		botoes.inicializar();
 		caixaDeTexto.inicializar();
 		
-		Menu menu = new Menu(telaPrincipal,caixaDeTexto);
+		BarraDeMenu menu = new BarraDeMenu(telaPrincipal,caixaDeTexto);
 		menu.inicializar();
 		
 		
