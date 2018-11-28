@@ -14,12 +14,10 @@ public class ControleDeMusica extends Thread{
 	public void tocarMusica() {
 		if(player.isPlaying() == false) {
 			if(player.isPaused()) {
-				System.out.println("resumindo");
 				player.resume();
 			}
 			else {
 				String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
-				System.out.println(textoConvertidoEmSequencia);
 				player.play(textoConvertidoEmSequencia);
 			}
 		}

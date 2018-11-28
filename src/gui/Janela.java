@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 
 public abstract class Janela implements ComponenteGUI {
@@ -26,7 +28,7 @@ public abstract class Janela implements ComponenteGUI {
 		novaTela.setTitle(nome);
 		novaTela.setBounds(100, 100, 450, 321);
 		novaTela.setDefaultCloseOperation(escolheTipo(opcao));
-		novaTela.getContentPane().setLayout(null);
+		novaTela.getContentPane().setLayout(new BorderLayout());
 		novaTela.setVisible(true);
 		return novaTela;
 	}
