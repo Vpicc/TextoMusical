@@ -24,7 +24,7 @@ public class JanelaComandos extends Janela{
 				+ "<tr><td>G (maiúsculo)</td><td>Nota Sol</td></tr>"
 				+ "<tr><td>Espaço</td><td>Aumenta o volume para o DOBRO do volume</td></tr>"
 				+ "<tr><td>!</td><td>Troca instrumento para Harpsichord</td></tr>"
-				+ "<tr><td>Outra letra vogal</td><td>Aumenta volume em 10%</td></tr>"
+				+ "<tr><td>O ou o,I ou i,U ou u</td><td>Aumenta volume em 10%</td></tr>"
 				+ "<tr><td>Dígito par ou impar</td><td>Troca instrumento para o General MIDI cujo Numero é igual ao valor do instrumento ATUAL + valor do dígito</td></tr>"
 				+ "<tr><td>? e .</td><td>Aumenta UMA oitava; Se não puder aumentar, volta para a default</td></tr>"
 				+ "<tr><td>NL (Nova Linha)</td><td>Troca instrumento para Tubular Bells</td></tr>"
