@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
@@ -36,9 +38,8 @@ public class CaixaDeTexto implements ComponenteGUI{
 		caixaDeTexto = new JTextPane();
 		caixaDeTextoComScroll = new JScrollPane(caixaDeTexto);
 		caixaDeTextoComScroll.setToolTipText("Digite o texto...");
-		caixaDeTextoComScroll.setBounds(55, 12, 333, 184);
 		caixaDeTexto.getDocument().addDocumentListener(acaoTexto());
-		telaPrincipal.getContentPane().add(caixaDeTextoComScroll);
+		telaPrincipal.getContentPane().add(BorderLayout.CENTER,caixaDeTextoComScroll);
 	}
 	
 	private DocumentListener acaoTexto() {
