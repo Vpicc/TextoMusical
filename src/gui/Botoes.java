@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -8,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import textoMusical.ControleDeMusica;
 
@@ -24,14 +27,21 @@ public class Botoes implements ComponenteGUI {
 	}
 	
 	public void inicializar() {
-		botaoReproduzir();
-		botaoParar();
-		botaoPausar();
-		botaoVoltar();
+		//Cria um Jpanel contendo todos os botoes
+		JPanel painelDeBotoes = new JPanel();
+		painelDeBotoes.setLayout(new FlowLayout());
+		
+		botaoReproduzir(painelDeBotoes);
+		botaoPausar(painelDeBotoes);
+		botaoParar(painelDeBotoes);
+		botaoVoltar(painelDeBotoes);
+		
+		telaPrincipal.getContentPane().add(BorderLayout.SOUTH,painelDeBotoes);
+
 		
 	}
 	
-	private void botaoReproduzir() {
+	private void botaoReproduzir(JPanel painelDeBotoes) {
 		JButton Reproduzir = new JButton("");
 		Reproduzir.setToolTipText("PLAY");
 		try{
@@ -54,11 +64,10 @@ public class Botoes implements ComponenteGUI {
 
 			}
 		});
-		Reproduzir.setBounds(65, 208, 117, 25);
-		telaPrincipal.getContentPane().add(Reproduzir);
+		painelDeBotoes.add(Reproduzir);
 	}
 	
-	private void botaoParar() {
+	private void botaoParar(JPanel painelDeBotoes) {
 		JButton Parar = new JButton("");
 		Parar.setToolTipText("STOP");
 		try{
@@ -75,12 +84,11 @@ public class Botoes implements ComponenteGUI {
 				}
 			}
 		});
-		Parar.setBounds(250, 208, 117, 25);
-		telaPrincipal.getContentPane().add(Parar);
+		painelDeBotoes.add(Parar);
 
 	}
 	
-	private void botaoPausar() {
+	private void botaoPausar(JPanel painelDeBotoes) {
 		JButton Pausar = new JButton("");
 		Pausar.setToolTipText("PAUSE");
 		try{
@@ -97,11 +105,10 @@ public class Botoes implements ComponenteGUI {
 				}
 			}
 		});
-		Pausar.setBounds(65, 233, 117, 25);
-		telaPrincipal.getContentPane().add(Pausar);
+		painelDeBotoes.add(Pausar);
 	}
 	
-	private void botaoVoltar() {
+	private void botaoVoltar(JPanel painelDeBotoes) {
 		JButton Voltar = new JButton("");
 		Voltar.setToolTipText("REWIND");
 		try{
@@ -121,8 +128,7 @@ public class Botoes implements ComponenteGUI {
 
 			}
 		});
-		Voltar.setBounds(250, 233, 117, 25);
-		telaPrincipal.getContentPane().add(Voltar);
+		painelDeBotoes.add(Voltar);
 	}
 	
 	private void geraThreadDeControle(){
