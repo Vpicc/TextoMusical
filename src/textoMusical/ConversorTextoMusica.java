@@ -17,7 +17,7 @@ public class ConversorTextoMusica {
 	}
 	
 	public String converterTextoParaSequencia() {
-		// Faz a traduï¿½ï¿½o do texto para uma String que Jfugue entende
+		// Faz a tradução do texto para uma String que Jfugue entende
 		Musica musica = new Musica();
 		
 		String sequencia = "";
@@ -47,14 +47,7 @@ public class ConversorTextoMusica {
 	}
 	
 	private String converterCaractere(String caractere,String caractereAnterior, Musica musica) {
-		switch(caractere) {
-			case "A":
-			case "B":
-			case "C":
-			case "D":
-			case "E":
-			case "F":
-			case "G":
+		if(notaValida(caractere)) {
 				return (caractere+traduzirOitava(musica.getOitava()));
 		}
 		switch(caractere.toLowerCase()) {
@@ -108,7 +101,7 @@ public class ConversorTextoMusica {
 				return traduzirInstrumento(musica.getInstrumento());
 			case "?":
 			case ".":
-				if(musica.getInstrumento() < musica.getMaxInstrumento()) {
+				if(musica.getOitava() < musica.getMaxOitava()) {
 					musica.aumentaOitava();
 				} else {
 					musica.setOitavaDefault();
@@ -142,9 +135,11 @@ public class ConversorTextoMusica {
 		return Integer.toString(oitava);
 	}
 	
+	/* Nao utilizado na fase 3
 	private String traduzirBpm(int bpm) {
 		return "T"+Integer.toString(bpm);
 	}
+	*/
 	
 	private boolean notaValida(String caractere) {
 		switch(caractere) {

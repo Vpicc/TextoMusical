@@ -1,6 +1,6 @@
 package teste;
 import textoMusical.*;
-import org.jfugue.*;
+
 
 public class Teste {
 

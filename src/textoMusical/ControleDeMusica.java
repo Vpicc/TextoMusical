@@ -1,6 +1,4 @@
 package textoMusical;
-import java.io.File;
-import java.io.IOException;
 
 import org.jfugue.Player;
 
@@ -14,28 +12,16 @@ public class ControleDeMusica extends Thread{
 	}
 
 	public void tocarMusica() {
-
 		if(player.isPlaying() == false) {
-
 			if(player.isPaused()) {
 				System.out.println("resumindo");
 				player.resume();
 			}
 			else {
-				System.out.println("NAO");
 				String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
-
+				System.out.println(textoConvertidoEmSequencia);
 				player.play(textoConvertidoEmSequencia);
 			}
-		}
-	}
-
-	public void salvarMIDI(File arquivo) {
-		String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
-		try {
-			player.saveMidi(textoConvertidoEmSequencia, arquivo);
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -46,27 +32,12 @@ public class ControleDeMusica extends Thread{
 	}
 
 	public void pausarMusica() {
-
 		if(player.isPlaying()) {
 			player.pause();
 		}
 	}
 
-
-	public void voltarMusica() { //IMPLEMENTEI TODO ELE NA WINDOW.JAVA
-		this.pararMusica();
-		this.tocarMusica();
-	}
 	public void run() {
-		if(player.isPaused()) {
-			System.out.println("resumindo THREAD");
-			player.resume();
-		}
-		else {
-			System.out.println("NAO thread");
-			String textoConvertidoEmSequencia = conversor.converterTextoParaSequencia();
-
-			player.play(textoConvertidoEmSequencia);
-		}
+			tocarMusica();
 	}
 }
