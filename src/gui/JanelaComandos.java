@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 public class JanelaComandos extends Janela{
 	
 	public void inicializar() {
-		JFrame telaComandos = criaJanela("Sobre", 100, 100, 950, 535,Janela.Tipo.ADICIONAL);
+		JFrame telaComandos = criaJanela("Comandos", 100, 100, 950, 535,Janela.Tipo.ADICIONAL);
 		telaComandos.setLayout(new BorderLayout());
 		JLabel labelComandos = new JLabel();
 		labelComandos.setText(textoComandos());
